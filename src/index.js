@@ -5,9 +5,9 @@ import { mintTokens } from './utils/mint.js';
 config();
 
 // Constants
-const TOKEN_ADDRESS = '0x72EaE48A5a509FEE30Ff34F3cB2A3fe6732251b3';
-const RECEIVER_ADDRESS = '0x4EAC292458355ba1D03F10BF4A9B39d7fD7d1E32';
 const TOKEN_AMOUNT = ethers.parseUnits('13', 18); // 13 tokens with 18 decimals
+const RECEIVER_ADDRESS = '0xab5801a7d398351b8be11c439e05c5b3259aec9b';
+const TOKEN_ADDRESS = '0x72EaE48A5a509FEE30Ff34F3cB2A3fe6732251b3';
 
 // Initialize provider and user wallet
 const provider = new ethers.JsonRpcProvider(process.env.ETH_SEPOLIA);
@@ -19,8 +19,8 @@ const tokenTransfer = async () => {
 
     // Prepare transaction data
     const selector = '0xa9059cbb'; // Function selector for transfer(address,uint256)
-    const receiver = RECEIVER_ADDRESS.replace('0x', '').padStart(64, '0'); // Адрес получателя без '0x' и с нулями в начале, чтобы суммарно было 256 бит
-    const amount = TOKEN_AMOUNT.toString(16).padStart(64, '0'); // toString(16) переводит в шестнадцатеричную строку: 1_000_000 => 0xf4240
+    const receiver = RECEIVER_ADDRESS.replace('0x', '').padStart(64, '0'); // The recipient address without '0x' and with leading zeros, so that the total is 256 bits
+    const amount = TOKEN_AMOUNT.toString(16).padStart(64, '0'); // toString(16) translates to a hexadecimal string: 13_000_000_000_000_000_000 → 0xb469471f80140000
 
     const txData = selector + receiver + amount;
     console.log('Transaction Data:', txData);
