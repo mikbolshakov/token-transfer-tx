@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "scripts": {
+    "format": "prettier --write 'src/**/*.{js,jsx,json,css,md}'"
+  },
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.4"
+  },
+  "devDependencies": {
+    "prettier": "^3.4.1"
+  }
+}
