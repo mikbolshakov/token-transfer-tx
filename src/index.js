@@ -56,12 +56,22 @@ const tokenTransfer = async () => {
     };
     console.log('Transaction Details:', tx);
 
+    const unsignedTx = ethers.Transaction.from(tx);
+    const unsignedSerialized = unsignedTx.unsignedSerialized;
+    const txSize = Buffer.byteLength(unsignedSerialized, 'hex');
+    console.log('Transaction size before signing (bytes):', txSize);
+
     // Sign the transaction
     const signedTx = await signer.signTransaction(tx);
     console.log('Signed Transaction:', signedTx);
 
+    const txSizeAfterSigning = Buffer.byteLength(signedTx, 'hex');
+    console.log('Transaction size after signing (bytes):', txSizeAfterSigning);
+
     // Decode and log the signature
     const txDecoded = ethers.Transaction.from(signedTx);
+    console.log('Decoded Transaction:');
+    console.log('  Hash:', txDecoded.unsignedHash); // Hash unsigned
     if (txDecoded.signature) {
       const { v, r, s } = ethers.Signature.from(txDecoded.signature);
       console.log('  v:', v);
